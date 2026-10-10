@@ -1,0 +1,284 @@
+<!doctype html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>TannnModel – Toko model 3D siap pakai</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,700;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#EDF0F7;--surface:#fff;--ink:#12142A;--mute:#5B6080;--line:#D9DEEC;--acc:#3B3BFF;--on-acc:#fff;--warm:#FFB224;--ok:#0E9F6E;
+--disp:'Bricolage Grotesque','Segoe UI',system-ui,sans-serif;--body:'Instrument Sans','Segoe UI',system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media(prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0E1020;--surface:#171A33;--ink:#EEF0FF;--mute:#9AA0C8;--line:#2A2E52;--acc:#8080FF;--on-acc:#0E1020}}
+:root[data-theme="dark"]{--bg:#0E1020;--surface:#171A33;--ink:#EEF0FF;--mute:#9AA0C8;--line:#2A2E52;--acc:#8080FF;--on-acc:#0E1020}
+*,*::before,*::after{box-sizing:inherit}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.55 var(--body)}
+button,input,select{font:inherit;color:inherit}
+button{cursor:pointer}
+:focus-visible{outline:3px solid var(--acc);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:color-mix(in srgb,var(--bg) 88%,transparent);backdrop-filter:blur(12px);border-bottom:1px solid var(--line)}
+.bar{display:flex;align-items:center;gap:10px;height:64px}
+.logo{font:800 22px/1 var(--disp);letter-spacing:-.02em;display:flex;align-items:center;gap:10px;text-decoration:none;color:var(--ink)}
+.logo i{width:26px;height:26px;border:3px solid var(--acc);border-radius:7px;transform:rotate(45deg) scale(.8);position:relative}
+.logo i::after{content:"";position:absolute;inset:4px;background:var(--warm);border-radius:2px}
+.sp{flex:1}
+.ib{height:42px;min-width:42px;padding:0 14px;border-radius:12px;border:1px solid var(--line);background:var(--surface);display:inline-flex;align-items:center;gap:8px;font-weight:600}
+.ib[aria-pressed="true"]{background:var(--acc);color:var(--on-acc);border-color:var(--acc)}
+.badge{background:var(--warm);color:#12142A;border-radius:99px;min-width:22px;height:22px;display:inline-grid;place-items:center;font-size:13px;font-weight:700;padding:0 6px}
+.hero{display:grid;grid-template-columns:1.05fr 1fr;gap:36px;align-items:center;padding:48px 0 36px}
+h1{font:800 clamp(34px,5.4vw,64px)/1.02 var(--disp);letter-spacing:-.035em;margin:0 0 18px;max-width:14ch}
+.lead{color:var(--mute);font-size:18px;max-width:46ch;margin:0 0 26px}
+.btn{height:48px;padding:0 24px;border-radius:12px;border:0;background:var(--acc);color:var(--on-acc);font-weight:600;display:inline-flex;align-items:center;justify-content:center;text-decoration:none}
+.btn.alt{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.row{display:flex;gap:12px;flex-wrap:wrap}
+.stage{position:relative;border-radius:28px;background:radial-gradient(circle at 50% 40%,#2B2F6B,#0C0E22 70%);aspect-ratio:1/.9;overflow:hidden;box-shadow:0 30px 60px -30px rgba(20,24,90,.6)}
+.stage canvas,.thumb canvas,.mcv{width:100%;height:100%;display:block;touch-action:none;cursor:grab}
+.stage small{position:absolute;left:18px;bottom:14px;color:#AEB4F5;font-size:13px}
+.perks{display:grid;grid-template-columns:repeat(4,1fr);gap:0;border:1px solid var(--line);border-radius:18px;background:var(--surface);margin-bottom:44px}
+.perks div{padding:16px 18px;border-right:1px solid var(--line);font-size:14px;color:var(--mute)}
+.perks div:last-child{border:0}
+.perks b{display:block;color:var(--ink);font-size:15px}
+.tools{display:flex;gap:12px;flex-wrap:wrap;align-items:center;margin-bottom:22px}
+.search{flex:1 1 240px;height:46px;border-radius:12px;border:1px solid var(--line);background:var(--surface);padding:0 16px}
+.chips{display:flex;gap:8px;flex-wrap:wrap;width:100%;order:3}
+.chip{height:38px;padding:0 16px;border-radius:99px;border:1px solid var(--line);background:var(--surface);font-weight:500}
+.chip[aria-pressed="true"]{background:var(--ink);color:var(--bg);border-color:var(--ink)}
+select{height:46px;border-radius:12px;border:1px solid var(--line);background:var(--surface);padding:0 12px}
+.count{color:var(--mute);font-size:14px;margin:0 0 14px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:18px;margin-bottom:60px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column}
+.thumb{position:relative;aspect-ratio:4/3;background:radial-gradient(circle at 50% 35%,#2B2F6B,#0C0E22 75%)}
+.heart{position:absolute;top:10px;right:10px;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.14);color:#fff;font-size:18px}
+.heart[aria-pressed="true"]{background:#FF4D6D}
+.tag{position:absolute;left:10px;top:10px;background:var(--warm);color:#12142A;font-size:12px;font-weight:700;border-radius:8px;padding:2px 8px}
+.cb{padding:14px 16px 16px;display:flex;flex-direction:column;gap:4px;flex:1}
+.cat{color:var(--mute);font-size:13px}
+.nm{font:700 18px/1.2 var(--disp);background:none;border:0;padding:0;text-align:left}
+.meta{color:var(--mute);font-size:13px}
+.pr{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:10px;gap:8px}
+.pr b{font:700 18px var(--disp)}
+.pr s{color:var(--mute);font-size:13px;margin-left:6px}
+.add{height:40px;padding:0 16px;border-radius:10px;border:0;background:var(--acc);color:var(--on-acc);font-weight:600}
+.empty{grid-column:1/-1;text-align:center;padding:50px 10px;color:var(--mute)}
+footer{border-top:1px solid var(--line);padding:28px 0 40px;color:var(--mute);font-size:14px}
+.ov{position:fixed;inset:0;background:rgba(8,10,30,.55);z-index:30;opacity:0;pointer-events:none;transition:opacity .2s}
+.ov.on{opacity:1;pointer-events:auto}
+aside{position:fixed;top:0;right:0;bottom:0;width:min(420px,100%);background:var(--surface);z-index:40;display:flex;flex-direction:column;transform:translateX(105%);transition:transform .28s;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+aside.on{transform:none}
+aside h2{font:700 22px var(--disp);margin:0;padding:18px 20px;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center}
+.lines{flex:1;overflow:auto;padding:8px 20px}
+.ln{display:grid;grid-template-columns:1fr auto;gap:4px 10px;padding:14px 0;border-bottom:1px solid var(--line)}
+.ln b{font-weight:600}
+.qty{display:inline-flex;align-items:center;gap:6px;margin-top:6px}
+.qty button{width:30px;height:30px;border-radius:8px;border:1px solid var(--line);background:var(--bg)}
+.sum{padding:16px 20px;border-top:1px solid var(--line);display:grid;gap:8px}
+.sum div{display:flex;justify-content:space-between}
+.sum .t{font:700 20px var(--disp)}
+.vc{display:flex;gap:8px}
+.vc input{flex:1;height:42px;border-radius:10px;border:1px solid var(--line);background:var(--bg);padding:0 12px;text-transform:uppercase}
+.vc button{padding:0 14px;border-radius:10px;border:1px solid var(--line);background:var(--bg)}
+.msg{font-size:13px;color:var(--ok);min-height:18px}
+.msg.bad{color:#E5484D}
+dialog{border:0;border-radius:24px;padding:0;width:min(860px,calc(100% - 24px));background:var(--surface);color:var(--ink)}
+dialog::backdrop{background:rgba(8,10,30,.6)}
+.md{display:grid;grid-template-columns:1.1fr 1fr}
+.mv{background:radial-gradient(circle at 50% 40%,#2B2F6B,#0C0E22 72%);min-height:340px;position:relative}
+.mv small{position:absolute;left:16px;bottom:12px;color:#AEB4F5;font-size:13px}
+.mi{padding:26px;display:flex;flex-direction:column;gap:10px}
+.mi h3{font:800 28px/1.1 var(--disp);margin:0;letter-spacing:-.02em}
+.fm{display:flex;gap:6px;flex-wrap:wrap}
+.fm span{border:1px solid var(--line);border-radius:8px;padding:2px 10px;font-size:13px}
+.x{position:absolute;top:12px;right:12px;z-index:2;width:38px;height:38px;border-radius:50%;border:0;background:rgba(255,255,255,.18);color:#fff;font-size:18px}
+.toast{position:fixed;left:50%;bottom:calc(24px + env(safe-area-inset-bottom,0px));transform:translate(-50%,30px);background:var(--ink);color:var(--bg);padding:12px 20px;border-radius:12px;opacity:0;transition:.25s;z-index:60;pointer-events:none}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+@media(max-width:820px){.hero{grid-template-columns:1fr;padding-top:28px}.perks{grid-template-columns:1fr 1fr}.perks div:nth-child(2){border-right:0}.perks div:nth-child(-n+2){border-bottom:1px solid var(--line)}.md{grid-template-columns:1fr}.ib .lb{display:none}}
+@media(prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}}
+</style>
+</head>
+<body>
+<header><div class="wrap bar">
+<a class="logo" href="#"><i></i>TannnModel</a><span class="sp"></span>
+<button class="ib" id="favBtn" aria-pressed="false" aria-label="Tampilkan favorit">♥ <span class="lb">Favorit</span> <span class="badge" id="favN">0</span></button>
+<button class="ib" id="cartBtn" aria-label="Buka keranjang">Keranjang <span class="badge" id="cartN">0</span></button>
+</div></header>
+
+<main class="wrap">
+<section class="hero">
+<div>
+<h1>Model 3D siap pakai untuk game dan proyekmu</h1>
+<p class="lead">Karakter, kendaraan, bangunan, dan properti dengan topologi rapi. Pilih, bayar, lalu unduh langsung dalam format yang kamu butuhkan.</p>
+<div class="row"><a class="btn" href="#katalog">Lihat katalog</a><button class="btn alt" id="rand">Kejutkan aku</button></div>
+</div>
+<div class="stage"><canvas id="hero" aria-label="Pratinjau model 3D yang bisa diputar"></canvas><small>Seret untuk memutar model</small></div>
+</section>
+
+<div class="perks">
+<div><b>Lisensi komersial</b>Boleh dipakai di game berbayar</div>
+<div><b>Format lengkap</b>FBX, OBJ, GLB, dan .rbxm</div>
+<div><b>Unduh instan</b>Tautan terkirim setelah bayar</div>
+<div><b>Bantuan WhatsApp</b>Revisi kecil gratis 7 hari</div>
+</div>
+
+<section id="katalog">
+<div class="tools">
+<input class="search" id="q" type="search" placeholder="Cari model, mis. robot atau mobil" aria-label="Cari model">
+<select id="sort" aria-label="Urutkan">
+<option value="sales">Terlaris</option><option value="lo">Harga terendah</option><option value="hi">Harga tertinggi</option><option value="rate">Rating tertinggi</option></select>
+<div class="chips" id="chips"></div>
+</div>
+<p class="count" id="count" aria-live="polite"></p>
+<div class="grid" id="grid"></div>
+</section>
+</main>
+
+<footer><div class="wrap">© 2026 TannnModel. Semua model dilisensikan untuk satu pembeli per pembelian.</div></footer>
+
+<div class="ov" id="ov"></div>
+<aside id="drawer" aria-label="Keranjang belanja" aria-hidden="true">
+<h2>Keranjang <button class="ib" id="closeCart" aria-label="Tutup keranjang">✕</button></h2>
+<div class="lines" id="lines"></div>
+<div class="sum">
+<div class="vc"><input id="vin" placeholder="Kode voucher" aria-label="Kode voucher"><button id="vbtn">Pakai</button></div>
+<div class="msg" id="vmsg" aria-live="polite">Coba TANNN10 atau HEMAT25K</div>
+<div><span>Subtotal</span><span id="sub"></span></div>
+<div><span>Diskon</span><span id="disc"></span></div>
+<div class="t"><span>Total</span><span id="tot"></span></div>
+<a class="btn" id="wa" target="_blank" rel="noopener">Pesan lewat WhatsApp</a>
+</div>
+</aside>
+
+<dialog id="dlg" aria-label="Detail model"><div class="md">
+<div class="mv"><canvas class="mcv" id="mcv" style="position:absolute;inset:0"></canvas><button class="x" id="dx" aria-label="Tutup">✕</button><small>Pratinjau wireframe, seret untuk memutar</small></div>
+<div class="mi" id="mi"></div></div></dialog>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+const $=s=>document.querySelector(s);
+const rp=n=>new Intl.NumberFormat('id-ID',{style:'currency',currency:'IDR',maximumFractionDigits:0}).format(n);
+const WA='6281234567890';
+const P=[
+{id:1,n:'Robot Kurir Neon',c:'Karakter',s:'ico',p:85000,o:110000,r:4.8,t:212,h:190,f:['FBX','GLB','.rbxm'],d:'Robot kurir rigged humanoid dengan 6 animasi dasar: diam, jalan, lari, lompat, melempar, dan menyapa.'},
+{id:2,n:'Ksatria Kristal',c:'Karakter',s:'oct',p:120000,r:4.9,t:168,h:265,f:['FBX','OBJ','.rbxm'],d:'Karakter fantasi low-poly dengan baju zirah terpisah, mudah diganti warna dan tekstur.'},
+{id:3,n:'Mobil Sport Prisma',c:'Kendaraan',s:'pri',p:150000,r:4.7,t:301,h:20,f:['FBX','GLB'],d:'Mobil sport dengan roda dan pintu terpisah, siap dipasang skrip kemudi.'},
+{id:4,n:'Motor Cyber',c:'Kendaraan',s:'tor',p:135000,o:160000,r:4.6,t:144,h:320,f:['FBX','OBJ','.rbxm'],d:'Motor futuristik dengan lampu emisif dan roda yang bisa berputar.'},
+{id:5,n:'Pesawat Mini',c:'Kendaraan',s:'tet',p:95000,r:4.5,t:97,h:45,f:['FBX','GLB'],d:'Pesawat kecil dengan baling-baling terpisah, cocok untuk game arcade.'},
+{id:6,n:'Drone Pengantar',c:'Kendaraan',s:'ico',p:99000,r:4.4,t:76,h:150,f:['GLB','OBJ'],d:'Drone empat baling-baling dengan titik kait paket di bagian bawah.'},
+{id:7,n:'Pos Jaga Modular',c:'Bangunan',s:'cub',p:110000,r:4.8,t:189,h:210,f:['FBX','OBJ','.rbxm'],d:'Pos jaga yang tersusun dari modul dinding, atap, dan tangga.'},
+{id:8,n:'Menara Kota Pack',c:'Bangunan',s:'pri',p:210000,o:260000,r:4.9,t:122,h:280,f:['FBX','GLB','.rbxm'],d:'Lima menara berbeda untuk latar kota, lengkap dengan jendela emisif.'},
+{id:9,n:'Rumah Kontainer',c:'Bangunan',s:'cub',p:175000,r:4.6,t:88,h:30,f:['FBX','OBJ'],d:'Rumah kontainer dua lantai dengan interior dasar dan pintu yang bisa dibuka.'},
+{id:10,n:'Peti Harta Karun',c:'Properti',s:'cub',p:45000,r:4.7,t:410,h:40,f:['FBX','GLB','.rbxm'],d:'Peti dengan tutup beranimasi buka dan tutup, plus tiga variasi material.'},
+{id:11,n:'Cincin Portal',c:'Properti',s:'tor',p:60000,r:4.8,t:233,h:300,f:['GLB','.rbxm'],d:'Gerbang portal dengan efek emisif, siap dipasangkan partikel.'},
+{id:12,n:'Kristal Energi',c:'Properti',s:'oct',p:35000,o:50000,r:4.5,t:358,h:170,f:['FBX','GLB','OBJ'],d:'Kristal pickup dengan tiga ukuran, cocok untuk item koleksi.'}];
+const cats=['Semua',...new Set(P.map(x=>x.c))];
+const ld=k=>{try{return JSON.parse(localStorage.getItem(k))||null}catch(e){return null}};
+const sv=(k,v)=>{try{localStorage.setItem(k,JSON.stringify(v))}catch(e){}};
+let cart=ld('tm_cart')||{},fav=ld('tm_fav')||[],cat='Semua',onlyFav=false,voucher=null;
+
+/* ---------- 3D wireframe ---------- */
+function poly(v){const d=(a,b)=>Math.hypot(a[0]-b[0],a[1]-b[1],a[2]-b[2]);let m=1e9;
+for(let i=0;i<v.length;i++)for(let j=i+1;j<v.length;j++)m=Math.min(m,d(v[i],v[j]));
+const e=[];for(let i=0;i<v.length;i++)for(let j=i+1;j<v.length;j++)if(d(v[i],v[j])<m*1.05)e.push([i,j]);return norm({v,e})}
+function norm(o){const k=Math.max(...o.v.map(a=>Math.hypot(...a)));o.v=o.v.map(a=>a.map(x=>x/k));return o}
+const g=(1+Math.sqrt(5))/2,SH={};
+SH.cub=poly([-1,1].flatMap(a=>[-1,1].flatMap(b=>[-1,1].map(c=>[a,b,c]))));
+SH.oct=poly([[1,0,0],[-1,0,0],[0,1,0],[0,-1,0],[0,0,1],[0,0,-1]]);
+SH.tet=poly([[1,1,1],[1,-1,-1],[-1,1,-1],[-1,-1,1]]);
+SH.ico=poly([-1,1].flatMap(a=>[-g,g].flatMap(b=>[[0,a,b],[a,b,0],[b,0,a]])));
+SH.pri=poly([-.5,.5].flatMap(z=>[0,1,2,3,4,5].map(k=>[Math.cos(k*Math.PI/3),z,Math.sin(k*Math.PI/3)])));
+(()=>{const U=16,V=8,v=[],e=[];for(let u=0;u<U;u++)for(let w=0;w<V;w++){const a=u/U*6.2832,b=w/V*6.2832;
+v.push([(1+.42*Math.cos(b))*Math.cos(a),.42*Math.sin(b),(1+.42*Math.cos(b))*Math.sin(a)]);
+e.push([u*V+w,u*V+(w+1)%V],[u*V+w,((u+1)%U)*V+w])}SH.tor=norm({v,e})})();
+const live=new Set();
+function draw(o){const c=o.c,w=c.clientWidth,h=c.clientHeight;if(!w)return;const dp=Math.min(devicePixelRatio||1,2);
+if(c.width!==Math.round(w*dp)){c.width=Math.round(w*dp);c.height=Math.round(h*dp)}
+const x=c.getContext('2d');x.setTransform(dp,0,0,dp,0,0);x.clearRect(0,0,w,h);
+const sc=Math.min(w,h)*.34,cy=Math.cos(o.ry),sy=Math.sin(o.ry),cx=Math.cos(o.rx),sx=Math.sin(o.rx),sh=SH[o.s];
+const Q=sh.v.map(([a,b,d])=>{const X=a*cy+d*sy;let Z=-a*sy+d*cy;const Y=b*cx-Z*sx;Z=b*sx+Z*cx;const f=3/(3+Z*.6);return[w/2+X*sc*f,h/2+Y*sc*f,Z]});
+x.lineWidth=1.5;x.shadowColor=`hsl(${o.h} 100% 65%)`;x.shadowBlur=9;
+sh.e.forEach(([i,j])=>{const a=Q[i],b=Q[j],al=Math.max(.2,Math.min(1,.6-(a[2]+b[2])*.2));
+x.strokeStyle=`hsl(${o.h} 95% 68% / ${al})`;x.beginPath();x.moveTo(a[0],a[1]);x.lineTo(b[0],b[1]);x.stroke()});
+x.fillStyle='#fff';Q.forEach(a=>{x.beginPath();x.arc(a[0],a[1],1.8,0,6.3);x.fill()})}
+const reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+function mk(c,s,h,spin){const o={c,s,h,rx:.5,ry:.7,spin:reduce?0:spin};
+let d=null;c.addEventListener('pointerdown',e=>{d=[e.clientX,e.clientY];c.setPointerCapture(e.pointerId);c.style.cursor='grabbing'});
+c.addEventListener('pointermove',e=>{if(!d)return;o.ry+=(e.clientX-d[0])*.01;o.rx+=(e.clientY-d[1])*.01;d=[e.clientX,e.clientY];draw(o)});
+c.addEventListener('pointerup',()=>{d=null;c.style.cursor='grab'});return o}
+(function loop(){live.forEach(o=>{o.ry+=o.spin;draw(o)});requestAnimationFrame(loop)})();
+const heroO=mk($('#hero'),'ico',230,.006);live.add(heroO);
+const shapes=['ico','oct','tor','pri','tet','cub'];
+$('#rand').onclick=()=>{heroO.s=shapes[Math.floor(Math.random()*6)];heroO.h=Math.floor(Math.random()*360);toast('Model di pratinjau diganti')};
+
+/* ---------- katalog ---------- */
+$('#chips').innerHTML=cats.map(c=>`<button class="chip" data-c="${c}" aria-pressed="${c==='Semua'}">${c}</button>`).join('');
+$('#chips').onclick=e=>{const b=e.target.closest('.chip');if(!b)return;cat=b.dataset.c;document.querySelectorAll('.chip').forEach(x=>x.setAttribute('aria-pressed',x===b));render()};
+$('#q').oninput=render;$('#sort').onchange=render;
+$('#favBtn').onclick=e=>{onlyFav=!onlyFav;e.currentTarget.setAttribute('aria-pressed',onlyFav);render()};
+let cards=[];
+function render(){
+const q=$('#q').value.trim().toLowerCase(),so=$('#sort').value;
+let L=P.filter(x=>(cat==='Semua'||x.c===cat)&&(!onlyFav||fav.includes(x.id))&&(x.n+' '+x.c+' '+x.d).toLowerCase().includes(q));
+L.sort((a,b)=>so==='lo'?a.p-b.p:so==='hi'?b.p-a.p:so==='rate'?b.r-a.r:b.t-a.t);
+$('#count').textContent=L.length+' model ditemukan';
+$('#grid').innerHTML=L.length?L.map(x=>`<article class="card" data-id="${x.id}">
+<div class="thumb"><canvas aria-hidden="true"></canvas>${x.o?`<span class="tag">Hemat ${Math.round((1-x.p/x.o)*100)}%</span>`:''}
+<button class="heart" data-a="fav" aria-pressed="${fav.includes(x.id)}" aria-label="Favorit ${x.n}">♥</button></div>
+<div class="cb"><span class="cat">${x.c}</span><button class="nm" data-a="open">${x.n}</button>
+<span class="meta">★ ${x.r} · ${x.t} terjual</span>
+<div class="pr"><span><b>${rp(x.p)}</b>${x.o?`<s>${rp(x.o)}</s>`:''}</span><button class="add" data-a="add">Tambah</button></div></div></article>`).join(''):
+`<div class="empty">Tidak ada model yang cocok. Coba kata kunci lain atau pilih kategori Semua.</div>`;
+live.forEach(o=>{if(o.card)live.delete(o)});
+cards=[...document.querySelectorAll('.card')].map(el=>{const x=P.find(p=>p.id==el.dataset.id),c=el.querySelector('canvas');
+const o=mk(c,x.s,x.h,.02);o.card=1;o.ry=.6+x.id;draw(o);
+const th=el.querySelector('.thumb');th.onmouseenter=()=>live.add(o);th.onmouseleave=()=>{live.delete(o)};return o});
+requestAnimationFrame(()=>cards.forEach(draw))}
+$('#grid').onclick=e=>{const b=e.target.closest('[data-a]');if(!b)return;const id=+b.closest('.card').dataset.id;
+if(b.dataset.a==='fav')toggleFav(id);else if(b.dataset.a==='add')addCart(id);else openModal(id)};
+function toggleFav(id){fav=fav.includes(id)?fav.filter(x=>x!==id):[...fav,id];sv('tm_fav',fav);$('#favN').textContent=fav.length;if(onlyFav)render();else document.querySelectorAll(`.card[data-id="${id}"] .heart`).forEach(h=>h.setAttribute('aria-pressed',fav.includes(id)))}
+
+/* ---------- modal ---------- */
+const dlg=$('#dlg');let mo=null;
+function openModal(id){const x=P.find(p=>p.id===id);
+$('#mi').innerHTML=`<span class="cat">${x.c} · ★ ${x.r} · ${x.t} terjual</span><h3>${x.n}</h3><p style="margin:0;color:var(--mute)">${x.d}</p>
+<div class="fm">${x.f.map(f=>`<span>${f}</span>`).join('')}</div>
+<div class="pr" style="margin-top:auto"><span><b style="font-size:24px">${rp(x.p)}</b>${x.o?`<s>${rp(x.o)}</s>`:''}</span></div>
+<div class="row"><button class="btn" id="mbuy">Beli sekarang</button><button class="btn alt" id="madd">Tambah ke keranjang</button></div>`;
+$('#mbuy').onclick=()=>{addCart(id,1);dlg.close();openCart()};$('#madd').onclick=()=>{addCart(id);dlg.close()};
+dlg.showModal();if(!mo)mo=mk($('#mcv'),x.s,x.h,.008);Object.assign(mo,{s:x.s,h:x.h});live.add(mo);draw(mo)}
+dlg.addEventListener('close',()=>live.delete(mo));$('#dx').onclick=()=>dlg.close();
+dlg.addEventListener('click',e=>{if(e.target===dlg)dlg.close()});
+
+/* ---------- keranjang ---------- */
+const dr=$('#drawer'),ov=$('#ov');
+function openCart(){dr.classList.add('on');ov.classList.add('on');dr.setAttribute('aria-hidden','false');$('#closeCart').focus()}
+function closeCart(){dr.classList.remove('on');ov.classList.remove('on');dr.setAttribute('aria-hidden','true')}
+$('#cartBtn').onclick=openCart;$('#closeCart').onclick=closeCart;ov.onclick=closeCart;
+addEventListener('keydown',e=>{if(e.key==='Escape')closeCart()});
+function addCart(id,silent){cart[id]=(cart[id]||0)+1;saveCart();if(!silent)toast('Ditambahkan ke keranjang')}
+function saveCart(){sv('tm_cart',cart);drawCart()}
+function totals(){const sub=Object.entries(cart).reduce((s,[id,q])=>s+P.find(p=>p.id==id).p*q,0);
+let d=0;if(voucher==='TANNN10')d=Math.round(sub*.1);if(voucher==='HEMAT25K'&&sub>=100000)d=25000;return{sub,d,tot:sub-d}}
+function drawCart(){const ids=Object.keys(cart);$('#cartN').textContent=ids.reduce((s,i)=>s+cart[i],0);
+$('#lines').innerHTML=ids.length?ids.map(id=>{const x=P.find(p=>p.id==id),q=cart[id];
+return`<div class="ln"><div><b>${x.n}</b><div class="meta">${x.c} · ${x.f.join(', ')}</div>
+<div class="qty"><button data-m="-" data-id="${id}" aria-label="Kurangi">−</button><span>${q}</span><button data-m="+" data-id="${id}" aria-label="Tambah">+</button></div></div>
+<div style="text-align:right"><b>${rp(x.p*q)}</b></div></div>`}).join(''):'<p class="meta" style="padding:24px 0">Keranjang masih kosong. Pilih model dari katalog lalu tekan Tambah.</p>';
+const t=totals();if(voucher==='HEMAT25K'&&t.d===0){voucher=null;msg('Voucher HEMAT25K butuh belanja minimal Rp100.000',1)}
+$('#sub').textContent=rp(t.sub);$('#disc').textContent=t.d?'− '+rp(t.d):'–';$('#tot').textContent=rp(t.tot);
+const wa=$('#wa');wa.style.pointerEvents=ids.length?'auto':'none';wa.style.opacity=ids.length?1:.5;
+const txt=`Halo TannnModel, saya mau pesan:\n`+ids.map(i=>{const x=P.find(p=>p.id==i);return`- ${x.n} x${cart[i]} (${rp(x.p*cart[i])})`}).join('\n')+(voucher?`\nVoucher: ${voucher}`:'')+`\nTotal: ${rp(t.tot)}`;
+wa.href=`https://wa.me/${WA}?text=${encodeURIComponent(txt)}`}
+$('#lines').onclick=e=>{const b=e.target.closest('[data-m]');if(!b)return;const id=b.dataset.id;cart[id]+=b.dataset.m==='+'?1:-1;if(cart[id]<1)delete cart[id];saveCart()};
+function msg(t,bad){const m=$('#vmsg');m.textContent=t;m.className='msg'+(bad?' bad':'')}
+$('#vbtn').onclick=()=>{const v=$('#vin').value.trim().toUpperCase(),s=totals().sub;
+if(v==='TANNN10'){voucher=v;msg('Voucher dipakai: diskon 10%')}
+else if(v==='HEMAT25K'){if(s>=100000){voucher=v;msg('Voucher dipakai: potongan Rp25.000')}else msg('Belanja minimal Rp100.000 untuk voucher ini',1)}
+else{voucher=null;msg('Kode voucher tidak dikenal',1)}drawCart()};
+let tt;function toast(t){const e=$('#toast');e.textContent=t;e.classList.add('on');clearTimeout(tt);tt=setTimeout(()=>e.classList.remove('on'),1800)}
+
+$('#favN').textContent=fav.length;drawCart();render();
+</script>
+</body>
+</html>
